@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Display Question</title>
+</head>
+<style>
+
+input[type=text] {
+  width: 150px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url('searchicon.png');
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+}
+
+
+
+.bu{
+  background-color: #04AA6D;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+
+}
+
+div.answer{
+  color: #ffffff;
+  font-weight: bold;
+  
+}
+div.answer:hover{
+  color: green;
+}
+</style>
+<body>
+
+
+  <div style="width:95%;height:70vh;display: flex;margin: auto;flex-direction: column;align-items: center;justify-content: center;border: 2px solid red;">
+    <form>
+      <label for="question_number">Enter question number:</label> <br>
+      <input type="text"id="question_number" name="question_number" placeholder="">
+      <!-- <input type="text" id="question_number" name="question_number"> -->
+      <button type="button" class="bu" onclick="displayQuestion()">Submit</button>
+    </form>
+    
+    <div id="question_text" style="width: 80%;min-height: 20%;border:2px solid red;justify-content: center;align-items: center;display: flex;"></div>
+  
+  
+    <div class="answer" id="answer_text" style="width:80%;min-height: 50px;display: flex;border:2px solid red;align-items: center;justify-content: center;"></div>
+
+  </div>
+	
+
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+	<script>
+    function displayQuestion() {
+	// Get the question number from the form data
+	var question_number = document.getElementById("question_number").value;
+	
+	// Load the Excel file using XLSX.js library
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', 'questions.xlsx', true);
+	xhr.responseType = 'arraybuffer';
+
+	xhr.onload = function(e) {
+		var data = new Uint8Array(xhr.response);
+		var workbook = XLSX.read(data, {type:'array'});
+		var worksheet = workbook.Sheets[workbook.SheetNames[0]];
+		
+		// Get the cell containing the question text
+		var cell1 = worksheet['A' + question_number];
+        var cell2 = worksheet['B' + question_number];
+		
+		// Output the question text
+		var question_text = document.getElementById("question_text");
+        var answer_text = document.getElementById("answer_text");
+		question_text.innerHTML =  cell1.v ;
+        answer_text.innerHTML=cell2.v;
+	};
+	
+	xhr.send();
+}
+
+  </script>
+</body>
+</html>
