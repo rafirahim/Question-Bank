@@ -3,7 +3,7 @@
 <head>
 	<title>Display Question</title>
 </head>
-<style>
+<!-- <style>
 
 input[type=text] {
   width: 150px;
@@ -39,13 +39,83 @@ div.answer{
 div.answer:hover{
   color: green;
 }
+</style> -->
+
+<style>
+  /* Base styles */
+input[type=text] {
+  width: 50%;
+  box-sizing: border-box;
+  background-color: #ccc;
+
+  border: 0px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  text-align: center;
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  margin-bottom: 16px;
+}
+
+/* Responsive styles */
+@media (min-width: 768px) {
+  input[type=text] {
+    width: 50%;
+    margin-right: 16px;
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 992px) {
+  input[type=text] {
+    width: 33.33%;
+    margin-right: 16px;
+    margin-bottom: 0;
+  }
+}
+
+  .bu {
+    background-color: #04AA6D;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+  div.answer {
+    color: #ffffff;
+    font-weight: bold;
+  }
+
+  div.answer:hover {
+    color: green;
+  }
+
+  /* Media queries */
+  @media screen and (min-width: 600px) {
+    /* Adjust the styles for screens that are at least 600px wide */
+    input[type=text] {
+      width: 300px;
+    }
+  }
+
+  @media screen and (min-width: 900px) {
+    /* Adjust the styles for screens that are at least 900px wide */
+    input[type=text] {
+      width: 500px;
+    }
+  }
 </style>
-<body>
+
+<body style="display: flex;align-items: center;justify-content: center;width: 100%; height: 100vh;">
 
 
   <div style="width:95%;height:70vh;display: flex;margin: auto;flex-direction: column;align-items: center;justify-content: center;border: 2px solid red;">
     <form>
-      <label for="question_number">Enter question number:</label> <br>
+      <label for="question_number" >Enter question number:</label> <br>
       <input type="text"id="question_number" name="question_number" placeholder="">
       <!-- <input type="text" id="question_number" name="question_number"> -->
       <button type="button" class="bu" onclick="displayQuestion()">Submit</button>
@@ -93,3 +163,4 @@ div.answer:hover{
   </script>
 </body>
 </html>
+
